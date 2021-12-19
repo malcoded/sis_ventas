@@ -1,0 +1,150 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="TicketReport" pageWidth="246" pageHeight="842" whenNoDataType="AllSectionsNoDetail" columnWidth="242" leftMargin="2" rightMargin="2" topMargin="5" bottomMargin="5" uuid="50172e56-b3fc-4205-99b0-2e8df01086ff">
+	<property name="ireport.zoom" value="3.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="189"/>
+	<parameter name="orderId" class="java.lang.Integer"/>
+	<parameter name="SUBREPORT_DIR" class="net.sf.jasperreports.engine.JasperReport"/>
+	<queryString>
+		<![CDATA[SELECT c.name,orderDate,orderCode,total FROM orders o JOIN clients c ON o.clientId=c.id WHERE o.id=$P{orderId};]]>
+	</queryString>
+	<field name="name" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="orderDate" class="java.sql.Date">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="orderCode" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="total" class="java.lang.Double">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="86" splitType="Stretch">
+			<staticText>
+				<reportElement x="0" y="0" width="241" height="13" uuid="297bdc63-fe46-4179-9c17-1e09fc091b77"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[S&L]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="59" width="26" height="9" uuid="8045f761-74aa-454e-94ea-dfc5fe23c56d"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font size="6" isBold="true" isItalic="false"/>
+				</textElement>
+				<text><![CDATA[Nro.:]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="27" y="59" width="44" height="9" uuid="9c3e519b-e4e9-4191-84da-ad61d699b945"/>
+				<textElement verticalAlignment="Middle">
+					<font size="6"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{orderCode}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="175" y="59" width="26" height="9" uuid="1bb27c63-da56-438a-887d-86005935904d"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font size="6" isBold="true" isItalic="false"/>
+				</textElement>
+				<text><![CDATA[Fecha:]]></text>
+			</staticText>
+			<textField pattern="d/M/yyyy">
+				<reportElement x="201" y="59" width="40" height="9" uuid="931c9d45-3007-42f5-b1ca-028f9420f612"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font size="6"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{orderDate}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="0" y="68" width="26" height="10" uuid="f42c32f4-07f0-4d50-a98b-014819d26f85"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font size="6" isBold="true" isItalic="false"/>
+				</textElement>
+				<text><![CDATA[Cliente:]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="27" y="68" width="148" height="10" uuid="fa8bacac-ba8b-40ce-b1f9-479bb8639425"/>
+				<textElement verticalAlignment="Middle">
+					<font size="6"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{name}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="0" y="13" width="241" height="13" uuid="bcebb811-08ea-4307-af6b-9f789bd7069e"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="6"/>
+				</textElement>
+				<text><![CDATA[Supermercados Latinos S.A.C]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="26" width="241" height="11" uuid="e99e8df7-93f5-42af-82ec-da55c832436c"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="6"/>
+				</textElement>
+				<text><![CDATA[Av. Angamos Nro. 1803, Surquillo 15038]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="37" width="241" height="11" uuid="76b84508-f403-4c8b-a51c-7b83220f0b12"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="6"/>
+				</textElement>
+				<text><![CDATA[Lima, Perú 250]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="48" width="241" height="11" uuid="d9940d68-badf-40b7-b882-6bb31a13473e"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="6"/>
+				</textElement>
+				<text><![CDATA[Mega Plaza Norte]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="175" y="68" width="26" height="10" uuid="013eeedc-9b96-4bc5-b356-fdcfba955c8b"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font size="6" isBold="true" isItalic="false"/>
+				</textElement>
+				<text><![CDATA[Total S/]]></text>
+			</staticText>
+			<textField pattern="#,##0.00">
+				<reportElement x="201" y="68" width="40" height="10" forecolor="#006666" uuid="c9246d3e-23fd-4094-9e33-e7a0be22c312"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font size="6"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{total}]]></textFieldExpression>
+			</textField>
+		</band>
+	</title>
+	<pageHeader>
+		<band splitType="Stretch"/>
+	</pageHeader>
+	<columnHeader>
+		<band splitType="Stretch"/>
+	</columnHeader>
+	<detail>
+		<band height="125" splitType="Stretch">
+			<subreport>
+				<reportElement x="0" y="0" width="242" height="125" uuid="6cf60174-b520-488e-9f7f-e3c009bdae34"/>
+				<subreportParameter name="orderId">
+					<subreportParameterExpression><![CDATA[$P{orderId}]]></subreportParameterExpression>
+				</subreportParameter>
+				<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
+				<subreportExpression><![CDATA[$P{SUBREPORT_DIR}]]></subreportExpression>
+			</subreport>
+		</band>
+	</detail>
+	<columnFooter>
+		<band splitType="Stretch"/>
+	</columnFooter>
+	<pageFooter>
+		<band splitType="Stretch">
+			<elementGroup/>
+		</band>
+	</pageFooter>
+	<summary>
+		<band height="22" splitType="Stretch"/>
+	</summary>
+</jasperReport>

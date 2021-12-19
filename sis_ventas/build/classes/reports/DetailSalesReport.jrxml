@@ -1,0 +1,133 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="DetailSalesReport" pageWidth="242" pageHeight="100" whenNoDataType="AllSectionsNoDetail" columnWidth="242" leftMargin="0" rightMargin="0" topMargin="0" bottomMargin="0" uuid="f4c4b87c-4242-4d38-a6ed-c3c3ccdcb6ee">
+	<property name="ireport.zoom" value="3.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<parameter name="orderId" class="java.lang.Integer"/>
+	<queryString>
+		<![CDATA[SELECT
+       (@row_num := @row_num + 1) AS id,
+       p.name,
+       od.quantity,
+       od.price,
+       CAST(od.price*od.quantity AS DECIMAL(6,2)) AS total
+FROM orders_details od
+    LEFT JOIN products p
+        ON p.id = od.productId
+        CROSS JOIN (select @row_num := 0) r
+        WHERE od.orderId = $P{orderId}]]>
+	</queryString>
+	<field name="id" class="java.lang.Double"/>
+	<field name="name" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="quantity" class="java.lang.Integer">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="price" class="java.lang.Double">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="total" class="java.math.BigDecimal"/>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band splitType="Stretch"/>
+	</title>
+	<pageHeader>
+		<band splitType="Stretch"/>
+	</pageHeader>
+	<columnHeader>
+		<band height="11" splitType="Stretch">
+			<staticText>
+				<reportElement x="0" y="0" width="33" height="11" uuid="cf8965c6-5919-4e23-8bdc-ff9c9e3698ac"/>
+				<textElement verticalAlignment="Middle">
+					<font size="6" isBold="true"/>
+				</textElement>
+				<text><![CDATA[#]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="33" y="0" width="64" height="11" uuid="8c6e4687-a93d-403f-839b-5019caf6bde7"/>
+				<textElement verticalAlignment="Middle">
+					<font size="6" isBold="true"/>
+				</textElement>
+				<text><![CDATA[PRODUCTO]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="177" y="1" width="63" height="10" uuid="8f9f9a07-cec5-4e2c-90fb-2a9d6318598e"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font size="6" isBold="true"/>
+				</textElement>
+				<text><![CDATA[TOTAL]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="134" y="1" width="43" height="10" uuid="0412297d-200f-4dbd-a85b-8629045e09bf"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font size="6" isBold="true"/>
+				</textElement>
+				<text><![CDATA[PRECIO]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="97" y="1" width="37" height="10" uuid="e72b834c-a112-4b0d-aebc-037b295914ee"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="6" isBold="true"/>
+				</textElement>
+				<text><![CDATA[CANT.]]></text>
+			</staticText>
+			<line>
+				<reportElement x="0" y="10" width="240" height="1" forecolor="#999999" backcolor="#999999" uuid="9538ce8b-3688-408b-9ae2-f3142b00af0d"/>
+			</line>
+			<line>
+				<reportElement x="0" y="0" width="240" height="1" forecolor="#999999" uuid="d59f6aea-dc89-4491-a77b-b0b456dfde5b"/>
+			</line>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="11" splitType="Stretch">
+			<textField pattern="###0">
+				<reportElement x="0" y="0" width="33" height="11" uuid="791c1d0b-bd45-4260-b61d-0adc49de4dc8"/>
+				<textElement verticalAlignment="Middle">
+					<font size="6"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{id}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="33" y="0" width="64" height="11" uuid="2a216138-9e62-4a7b-8432-bdf28095ce61"/>
+				<textElement verticalAlignment="Middle">
+					<font size="6"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{name}]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0.00">
+				<reportElement x="134" y="0" width="43" height="11" uuid="bc981266-5dec-4f6f-b2be-e78a47dd4ac6"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font size="6"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{price}]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0.00">
+				<reportElement x="177" y="0" width="63" height="11" uuid="be9f05ad-4bf6-41a8-a71b-050e05bbb8f5"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font size="6"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{total}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="97" y="0" width="37" height="11" uuid="1fba7a44-b065-42da-994f-6a513b05c0ac"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="6"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{quantity}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<columnFooter>
+		<band splitType="Stretch"/>
+	</columnFooter>
+	<pageFooter>
+		<band splitType="Stretch"/>
+	</pageFooter>
+	<summary>
+		<band splitType="Stretch"/>
+	</summary>
+</jasperReport>
